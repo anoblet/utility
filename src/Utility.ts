@@ -64,7 +64,7 @@ export const detectClickOutside = (target, callback) =>
   });
 
 /**
- * Takes a node, css result and appends it
+ * Takes a node, CSSResult and appends it
  */
 export const applyStyle = (node, style) => {
   const styleSheets = node.shadowRoot.adoptedStyleSheets;
