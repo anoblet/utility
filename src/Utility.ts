@@ -69,12 +69,12 @@ export const detectClickOutside = (target, callback) =>
  * Takes a node, CSSResult and appends it
  */
 export const applyStyle = (node: LitElement, style: CSSResult) => {
-  if (node.shadowRoot) {
+  if ("adoptedStyleSheets" in document) {
     const sheets = node.shadowRoot.adoptedStyleSheets;
     node.shadowRoot.adoptedStyleSheets = [...sheets, style._styleSheet];
   } else {
     const styleNode = document.createElement("style");
-    // render(styleNode, style);
-    node.appendChild(styleNode);
+    styleNode.textContent = style.cssText;
+    node.shadowRoot.appendChild(styleNode);
   }
 };
