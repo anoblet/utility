@@ -73,10 +73,10 @@ export const applyStyle = (
   style: CSSResult,
   supportsConstructable = true
 ) => {
-  if (!supportsConstructable) {
-    const style = document.createElement("style");
-  } else {
+  if (supportsConstructable) {
     const sheets = node.shadowRoot.adoptedStyleSheets;
     node.shadowRoot.adoptedStyleSheets = [...sheets, style._styleSheet];
+  } else {
+    const style = document.createElement("style");
   }
 };
