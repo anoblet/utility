@@ -1,3 +1,5 @@
+import { LitElement, CSSResult } from "lit-element";
+
 export const isTrue = (expression: any, callback: any) => {
   return expression ? callback : "";
 };
@@ -66,10 +68,15 @@ export const detectClickOutside = (target, callback) =>
 /**
  * Takes a node, CSSResult and appends it
  */
-export const applyStyle = (node, style) => {
-  const styleSheets = node.shadowRoot.adoptedStyleSheets;
-  node.shadowRoot.adoptedStyleSheets = [
-    ...styleSheets,
-    style._styleSheet
-  ];
+export const applyStyle = (
+  node: LitElement,
+  style: CSSResult,
+  supportsConstructable = true
+) => {
+  if (!supportsConstructable) {
+    const style = document.createElement("style");
+  } else {
+    const sheets = node.shadowRoot.adoptedStyleSheets;
+    node.shadowRoot.adoptedStyleSheets = [...sheets, style._styleSheet];
+  }
 };
